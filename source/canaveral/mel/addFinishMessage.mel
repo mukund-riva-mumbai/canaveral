@@ -1,0 +1,4 @@
+global proc addFinishMessage()
+{
+    print("READY FOR INPUT\n");
+}
