@@ -165,14 +165,19 @@ class MayaRenderLauncher(maya_deadline.Ui_deadline_launch_win, QtGui.QMainWindow
                 lyr_index = each_arg_parts.index("-rl") + 1
 
             job_name = name
+            out_dir = output_dir
             if cam_index != -1:
                 job_name += "_" + each_arg_parts[cam_index].strip("\"")
+                out_dir += "\\" + each_arg_parts[cam_index].strip("\"")
             if lyr_index != -1:
                 job_name += "_" + each_arg_parts[lyr_index].strip("\"")
 
             # Modify the job name entry to match the name of the job
             bjfp_list[5] = "Name=" + job_name + "\n"
-            pjfp_list[4] = "ApplicationArguments=" + each_arg + "\n"
+            bjfp_list[6] = "OutputDirectory0=" + out_dir + "\n"
+
+            args = each_arg.replace(output_dir, out_dir)
+            pjfp_list[4] = "ApplicationArguments=" + args + "\n"
 
             # Write the job files out...
             bjf_handle = open(base_job_file_loc + job_name + ".job", "w")
