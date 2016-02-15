@@ -121,15 +121,6 @@ class MayaRenderLauncher(maya_deadline.Ui_deadline_launch_win, QtGui.QMainWindow
         pjfp_list.append("ArnoldVersion=%s\n" % ren_ver)
         pjfp_list.append("ApplicationArguments=/n")
 
-        # Test Writes:
-        #bjf_handle = open(base_job_file, "w")
-        #bjf_handle.writelines(bjfp_list)
-        #bjf_handle.close()
-
-        #pjf_handle = open(plugin_job_file, "w")
-        #pjf_handle.writelines(pjfp_list)
-        #pjf_handle.close()
-
         # With that out of the way, we have to deal with multiple cameras and multiple render layers.
         # specifically, they affect two parts of our write operation:
         # (1) The name of the job(s) and the name of the .job files. Ideally, the name of the job(s) should be
@@ -178,7 +169,6 @@ class MayaRenderLauncher(maya_deadline.Ui_deadline_launch_win, QtGui.QMainWindow
                 job_name += "_" + each_arg_parts[cam_index].strip("\"")
             if lyr_index != -1:
                 job_name += "_" + each_arg_parts[lyr_index].strip("\"")
-
 
             # Modify the job name entry to match the name of the job
             bjfp_list[5] = "Name=" + job_name + "\n"
